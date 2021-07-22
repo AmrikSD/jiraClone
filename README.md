@@ -25,6 +25,19 @@ bringing everything down
 ## Client (TS, React)
 
 ## Server (TS, Node, Express)
+
 This is where the backend for the project lives.
 
-The backend was bootstrapped with (express-generator-typescript)[https://www.npmjs.com/package/express-generator-typescript]
+The backend was bootstrapped with [express-generator-typescript](https://github.com/ljlm0402/typescript-express-starter)
+
+## 📬 Recommended Commit Messages
+
+| When             | Commit Message     |
+| :--------------- | :----------------- |
+| Add Feature      | ✨ Add Feature     |
+| Fix Bug          | 🐞 Fix Bug         |
+| Refactoring Code | 🛠 Refactoring Code |
+| Install Package  | 📦 Install Package |
+| Fix Readme       | 📚 Fix Readme      |
+| Update Version   | 🌼 Update Version  |
+| New Template     | 🎉 New Template    |
