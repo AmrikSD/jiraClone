@@ -8,12 +8,14 @@ build the containers
 run the containers in the background
 `docker-compose up -d`
 
-get a shell inside of the client conainer
+after this, you should be able to hit localhost:3000 for the client and localhost:9000 for the API
+
+to get a shell inside of the client conainer, e.g to debug something
 `docker exec -it client sh`
 from inside the client container
 `npm start`
 
-get a shell inside of the server container
+to get a shell inside of the server container
 `docker exec -it server sh`
 
 from inside the server container
