@@ -1,4 +1,4 @@
-version: "3.4"
+version: '3.4'
 services:
   client:
     container_name: client
@@ -14,7 +14,7 @@ services:
     ports:
       - 3000:3000
     networks:
-      - backend
+      - frontend
   server:
     container_name: server
     build:
@@ -26,13 +26,30 @@ services:
     tty: true
     volumes:
       - ./server:/app
-      - /app/node_modules
     ports:
       - 9000:9000
+    networks:
+      - frontend
+      - backend
+  db:
+    image: postgres:13.3-alpine
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: amriksd
+      POSTGRES_PASSWORD: supersecurepassword
+      POSTGRES_DB: jwt
+      PGDATA: /dbdata
+    volumes:
+      - ./db:/dbdata
+    ports:
+      - 5432:5432
     networks:
       - backend
 
 networks:
+  frontend:
+    driver: bridge
   backend:
     driver: bridge
 
