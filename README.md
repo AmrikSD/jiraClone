@@ -30,8 +30,6 @@ bringing everything down
 
 This is where the backend for the project lives.
 
-The backend was bootstrapped with [express-generator-typescript](https://github.com/ljlm0402/typescript-express-starter)
-
 ## 📬 Recommended Commit Messages
 
 | When             | Commit Message     |
