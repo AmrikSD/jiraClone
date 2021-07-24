@@ -3,6 +3,7 @@ import {
   Arg,
   Ctx,
   Field,
+  Int,
   Mutation,
   ObjectType,
   Query,
@@ -12,7 +13,8 @@ import {
 import argon2 from 'argon2'
 import { Context } from '@utils/Context'
 import { isAuth } from '@middleware/Auth'
-import { createAccessToken, createRefreshToken } from '@auth/tokens'
+import { createAccessToken, sendRefreshToken } from '@auth/tokens'
+import { getConnection } from 'typeorm'
 
 @ObjectType()
 class LoginResponse {
@@ -36,6 +38,15 @@ class UserResolver {
   @Query(() => [User])
   users() {
     return User.find()
+  }
+
+  @Mutation(() => Boolean)
+  async revokeRefreshTokensForUser(@Arg('userID', () => Int) userID: number) {
+    await getConnection()
+      .getRepository(User)
+      .increment({ id: userID }, 'refreshTokenVersion', 1)
+
+    return true
   }
 
   @Mutation(() => Boolean)
@@ -74,9 +85,7 @@ class UserResolver {
     }
 
     //if here, login is successful, so give them the goods (tokens)
-    res.cookie('jcjwt', createRefreshToken(user), {
-      httpOnly: true
-    })
+    sendRefreshToken(res, user)
 
     return {
       accessToken: createAccessToken(user)

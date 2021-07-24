@@ -1,3 +1,6 @@
+process.env['NODE_CONFIG_DIR'] = __dirname + '/config'
+import { logger, stream } from '@utils/logger'
+
 import 'reflect-metadata'
 import os from 'os'
 import express from 'express'
@@ -6,11 +9,10 @@ import { buildSchema } from 'type-graphql'
 import { UserResolver } from '@resolvers/UserResolver'
 import { createConnection } from 'typeorm'
 import morgan from 'morgan'
-
-process.env['NODE_CONFIG_DIR'] = __dirname + '/config'
-import { logger, stream } from '@utils/logger'
+import cookieParser from 'cookie-parser'
 import isDocker from 'is-docker'
 import config from 'config'
+import { authRouter } from '@routes/authRouter'
 ;(async () => {
   const port = process.env.PORT || 9000
   const hostname = os.hostname() || 'unknown'
@@ -19,12 +21,14 @@ import config from 'config'
   const app = express()
 
   app.use(morgan(config.get('log.format'), { stream }))
+  app.use(cookieParser())
 
   await createConnection() //all info used in this is from ./ormconfig.json
 
   app.get('/', (_req, res) => {
     res.send('hello world')
   })
+  app.use('/auth', authRouter)
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({

@@ -31,7 +31,8 @@
       "@entity/*":["./src/entity/*"],
       "@middleware/*":["./src/middleware/*"],
       "@utils/*":["./src/utils/*"],
-      "@auth/*":["./src/auth/*"]
+      "@auth/*":["./src/auth/*"],
+      "@routes/*":["./src/routes/*"]
     }
   },
   "exclude": [
