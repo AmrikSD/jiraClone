@@ -28,7 +28,10 @@
     "baseUrl": ".",
     "paths": {
       "@resolvers/*":["./src/resolvers/*"],
-      "@entity/*":["./src/entity/*"]
+      "@entity/*":["./src/entity/*"],
+      "@middleware/*":["./src/middleware/*"],
+      "@utils/*":["./src/utils/*"],
+      "@auth/*":["./src/auth/*"]
     }
   },
   "exclude": [

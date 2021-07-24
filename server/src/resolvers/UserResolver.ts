@@ -6,11 +6,13 @@ import {
   Mutation,
   ObjectType,
   Query,
-  Resolver
+  Resolver,
+  UseMiddleware
 } from 'type-graphql'
 import argon2 from 'argon2'
-import { Context } from 'src/utils/Context'
-import { createAccessToken, createRefreshToken } from 'src/auth/auth'
+import { Context } from '@utils/Context'
+import { isAuth } from '@middleware/Auth'
+import { createAccessToken, createRefreshToken } from '@auth/tokens'
 
 @ObjectType()
 class LoginResponse {
@@ -23,6 +25,12 @@ class UserResolver {
   @Query(() => String)
   hello() {
     return 'wowee hello!'
+  }
+
+  @Query(() => String)
+  @UseMiddleware(isAuth)
+  getId(@Ctx() { payload }: Context) {
+    return `${payload!.userID}`
   }
 
   @Query(() => [User])

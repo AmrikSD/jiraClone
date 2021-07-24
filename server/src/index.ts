@@ -5,15 +5,22 @@ import { ApolloServer } from 'apollo-server-express'
 import { buildSchema } from 'type-graphql'
 import { UserResolver } from '@resolvers/UserResolver'
 import { createConnection } from 'typeorm'
+import morgan from 'morgan'
+
+process.env['NODE_CONFIG_DIR'] = __dirname + '/config'
+import { logger, stream } from '@utils/logger'
+import isDocker from 'is-docker'
+import config from 'config'
 ;(async () => {
   const port = process.env.PORT || 9000
   const hostname = os.hostname() || 'unknown'
+  const env = process.env.NODE_ENV || 'unknown'
 
   const app = express()
 
-  await createConnection() //all info used in this is from ./ormconfig.json
+  app.use(morgan(config.get('log.format'), { stream }))
 
-  console.log(`current node is ${hostname}`)
+  await createConnection() //all info used in this is from ./ormconfig.json
 
   app.get('/', (_req, res) => {
     res.send('hello world')
@@ -30,6 +37,10 @@ import { createConnection } from 'typeorm'
   apolloServer.applyMiddleware({ app })
 
   app.listen(port, () => {
-    console.log(`listening on post ${port}`)
+    logger.info(`=================================`)
+    logger.info(`======= ENV: ${env} ========`)
+    logger.info(`${isDocker() ? '🐳' : '🖥️'} Running on node ${hostname}`)
+    logger.info(`🚀 App listening on the port ${port}`)
+    logger.info(`=================================`)
   })
 })()
