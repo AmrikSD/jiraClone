@@ -27,7 +27,8 @@
     "resolveJsonModule": true,
     "baseUrl": ".",
     "paths": {
-      "@resolvers/*":["./src/resolvers/*"]
+      "@resolvers/*":["./src/resolvers/*"],
+      "@entity/*":["./src/entity/*"]
     }
   },
   "exclude": [

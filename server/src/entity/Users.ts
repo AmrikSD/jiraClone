@@ -10,14 +10,8 @@ export class User extends BaseEntity {
 
   @Field()
   @Column('text')
-  firstName: string
+  email: string
 
   @Column('text')
-  lastName: string
-
-  @Column('int')
-  age: number
-
-  @Column('int', { default: 0 })
-  tokenVersion: number
+  password: string
 }

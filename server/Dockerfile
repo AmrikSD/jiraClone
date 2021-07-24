@@ -7,7 +7,7 @@ COPY ./package.json /app/package.json
 COPY ./package-lock.json /app/package-lock.json
 WORKDIR /app
 
-EXPOSE ${PORT}
+EXPOSE 9000
 
 #### Development build stage ####
 FROM common-build-stage as development-build-stage
