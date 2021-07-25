@@ -54,4 +54,11 @@ authRouter.post('/refresh_token', async (req, res) => {
   return res.send({ ok: true, accessToken: createAccessToken(user) })
 })
 
+authRouter.get('refresh_token', (_req, res) => {
+  res.send({
+    ok: false,
+    message: 'refresh_token expects a POST request, not GET'
+  })
+})
+
 export { authRouter }
