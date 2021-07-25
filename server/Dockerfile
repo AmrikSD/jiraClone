@@ -1,31 +1,29 @@
-# Common build stage
-FROM node:14.14.0-alpine3.12 as common-build-stage
+#=== prebuild image ===#
+FROM node:14.14.0-alpine3.12 as prebuild-stage
 
 # Install Dependencies
 RUN mkdir /app/
+WORKDIR /app/
+
 COPY ./package.json /app/package.json
 COPY ./package-lock.json /app/package-lock.json
-WORKDIR /app
+
+#=== Dev Image ===#
+FROM prebuild-stage as dev
 
 EXPOSE 9000
 
-#### Development build stage ####
-FROM common-build-stage as development-build-stage
+ENV NODE_ENV=development
+RUN npm install --quiet
 
-ENV NODE_ENV development
-RUN npm install
-# Put in source AFTER the npm install, otherwise we lose caching of layers
-COPY . /app/
-
+COPY . .
 CMD ["npm", "run", "dev"]
 
-#### Production build stage ####
-FROM common-build-stage as production-build-stage
+#=== Prod Image ===#
+FROM prebuild-stage as prod
 
-ENV NODE_ENV production
-RUN npm install
-# Put in source AFTER the npm install, otherwise we lose caching of layers
-COPY . /app/
+ENV NODE_ENV=production
+RUN npm install --quiet
 
-CMD ["npm", "run", "start"]
-
+COPY . .
+CMD ["npm","run","start"]

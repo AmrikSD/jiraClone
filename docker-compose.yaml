@@ -1,16 +1,14 @@
-version: '3.4'
+version: "3.4"
 services:
   client:
     container_name: client
     build:
       context: ./client
-      target: development-build-stage
+      target: dev
       dockerfile: Dockerfile
     working_dir: /app
     stdin_open: true
     tty: true
-    volumes:
-      - ./client/:/app
     ports:
       - 3000:3000
     networks:
@@ -19,13 +17,11 @@ services:
     container_name: server
     build:
       context: ./server
-      target: development-build-stage
+      target: dev
       dockerfile: Dockerfile
     working_dir: /app
     stdin_open: true
     tty: true
-    volumes:
-      - ./server:/app
     ports:
       - 9000:9000
     networks:
