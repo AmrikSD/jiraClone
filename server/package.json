@@ -1,5 +1,11 @@
 {
   "name": "server",
+  "description": "backend server to a jira clone",
+  "author": {
+    "name": "Amrik Singh",
+    "email": "amrik.singh@live.co.uk",
+    "url": "https://amrik.de"
+  },
   "version": "1.1.0",
   "main": "index.js",
   "license": "MIT",
