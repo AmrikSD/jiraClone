@@ -29,14 +29,11 @@ services:
       - backend
   db:
     image: postgres:13.3-alpine
-    container_name: postgres
+    container_name: jiraDB
     environment:
       POSTGRES_USER: amriksd
       POSTGRES_PASSWORD: supersecurepassword
       POSTGRES_DB: jwt
-      PGDATA: /dbdata
-    volumes:
-      - ./db:/dbdata
     ports:
       - 5432:5432
     networks:
@@ -47,7 +44,3 @@ networks:
     driver: bridge
   backend:
     driver: bridge
-
-volumes:
-  data:
-    driver: local
