@@ -12,6 +12,11 @@
 This is where the backend for the project lives.
 The backend was bootstrapped with [express-generator-typescript](https://github.com/ljlm0402/typescript-express-starter)
 
+## Database
+
+The database is just a postgres database that is pulled down from docker, any other DB could be used.
+To get rid of all the data in the DB currently, just remove the container `docker container rm jiraDB`
+
 ## 📬 Recommended Commit Messages
 
 | When             | Commit Message     |
