@@ -3,7 +3,9 @@
 ## Getting Started
 
 `docker-compose up --build`
-[this](https://youtu.be/ktvgr9VZ4dc) video might be helpful too!
+
+### Dev tips
+After the containers are running, use the [remote-containers](https://code.visualstudio.com/docs/remote/containers) extension inside of VSCode to develop easily.
 
 ## Client (TS, React)
 
