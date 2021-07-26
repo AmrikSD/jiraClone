@@ -15,7 +15,7 @@ FROM prebuild as dev
 EXPOSE 3000
 
 ENV NODE_ENV development
-RUN npm install --quiet
+RUN npm ci --quiet
 # Put in source AFTER the npm install, otherwise we lose caching of layers
 COPY . /app/
 
@@ -24,14 +24,15 @@ CMD ["npm", "run", "start"]
 #### Production build stage ####
 FROM prebuild as prod-build
 
-ENV NODE_ENV production
-RUN npm install --quiet
+# Need development environment to get typescript etc, to compile and build properly.
+ENV NODE_ENV development
+RUN npm ci --quiet
 # Put in source AFTER the npm install, otherwise we lose caching of layers
 COPY . /app/ 
 
 # remove any previously left over (for whatever reason) build folder
-RUN rm -r build
-
+# use force to stop any errors if the folder doens't exist, which it shouldn't
+RUN rm -r -f build
 RUN npm run build
 
 ### production deployment stage ### 
