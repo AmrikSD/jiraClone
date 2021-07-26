@@ -6,6 +6,7 @@ services:
       context: ./client
       target: dev
       dockerfile: Dockerfile
+    image: amriksd/jira-client
     working_dir: /app
     stdin_open: true
     tty: true
@@ -19,6 +20,7 @@ services:
       context: ./server
       target: dev
       dockerfile: Dockerfile
+    image: amriksd/jira-server
     working_dir: /app
     stdin_open: true
     tty: true
