@@ -14,7 +14,7 @@ FROM prebuild-stage as dev
 EXPOSE 9000
 
 ENV NODE_ENV=development
-RUN npm install --quiet
+RUN npm ci --quiet
 
 COPY . .
 CMD ["npm", "run", "dev"]
@@ -23,7 +23,7 @@ CMD ["npm", "run", "dev"]
 FROM prebuild-stage as prod
 
 ENV NODE_ENV=production
-RUN npm install --quiet
+RUN npm ci --quiet
 
 COPY . .
 CMD ["npm","run","start"]
