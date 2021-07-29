@@ -7,10 +7,10 @@
     "url": "https://amrik.de"
   },
   "version": "1.1.0",
-  "main": "./build/index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon -e ts,js --exec ts-node -r tsconfig-paths/register ./src/index.ts"
+    "dev": "nodemon -e ts,js --exec ts-node -r tsconfig-paths/register ./src/index.ts",
+    "build": "tsc --project tsconfig.json && tscpaths -p tsconfig.json -s ./src -o ./build"
   },
   "devDependencies": {
     "@types/config": "0.0.39",
@@ -24,8 +24,8 @@
     "nodemon": "^2.0.12",
     "ts-node": "^10.1.0",
     "tsconfig-paths": "^3.10.1",
-    "typescript": "^4.3.5",
-    "typescript-transform-paths": "^3.1.0"
+    "tscpaths": "0.0.9",
+    "typescript": "^4.3.5"
   },
   "dependencies": {
     "@types/morgan": "^1.9.3",

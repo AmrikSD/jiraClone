@@ -7,6 +7,8 @@ WORKDIR /app
 
 COPY ./package.json /app/package.json
 COPY ./package-lock.json /app/package-lock.json
+COPY ./tsconfig.json /app/tsconfig.json
+
 
 
 #### Development build stage ####
@@ -22,7 +24,7 @@ COPY . /app/
 CMD ["npm", "run", "start"]
 
 #### Production build stage ####
-FROM prebuild as prod-build
+FROM prebuild as build
 
 # Need development environment to get typescript etc, to compile and build properly.
 ENV NODE_ENV development
@@ -38,7 +40,7 @@ RUN npm run build
 ### production deployment stage ### 
 FROM nginx:stable-alpine as prod
 
-COPY --from=prod-build /app/build /usr/share/nginx/html
+COPY --from=build /app/build /usr/share/nginx/html
 COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]

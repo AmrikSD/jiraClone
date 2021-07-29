@@ -28,6 +28,7 @@ To get rid of all the data in the DB currently, just remove the container `docke
 | Fix Bug          | 🐞 Fix Bug         |
 | Refactoring Code | 🛠 Refactoring Code |
 | Install Package  | 📦 Install Package |
+| Docker Changes   | 🐳 Docker change   |
 | Fix Readme       | 📚 Fix Readme      |
 | Update Version   | 🌼 Update Version  |
 | New Template     | 🎉 New Template    |

@@ -1,6 +1,6 @@
 import { User } from '@entity/Users'
 import { sign } from 'jsonwebtoken'
-import { accessSecret, refreshSecret } from 'src/utils/secret'
+import { accessSecret, refreshSecret } from '@utils/secret'
 import { Response } from 'express'
 
 export const createAccessToken = (user: User) => {
