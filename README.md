@@ -8,7 +8,11 @@
 
 After the containers are running, use the [remote-containers](https://code.visualstudio.com/docs/remote/containers) extension to [Attach to a running container](https://code.visualstudio.com/docs/remote/attach-container) inside of VSCode to develop from the container.
 
+This workflow means that you will never need to install a specific node version or dependency on your dev machine, you can keep the dev environment _exactly_ the same as production.
+
 ## Client (TS, React)
+
+The client was bootstrapped with create-react app using the --typescript flag. 
 
 ## Server (TS, Node, Express)
 
