@@ -19,7 +19,12 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
-      - name: build docker images
-        run: docker-compose build
-      - name: push docker images
-        run: docker-compose push
+      - name: build & push client image
+        run: |
+          docker build --target prod client -t amriksd/jira-client
+          docker push amriksd/jira-client
+      - name: build & push server docker image
+        run: | 
+          docker build --target prod server -t amriksd/jira-server
+          docker push amriksd/jira-server
+
