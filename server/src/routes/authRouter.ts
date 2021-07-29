@@ -55,10 +55,7 @@ authRouter.post('/refresh_token', async (req, res) => {
 })
 
 authRouter.get('/refresh_token', (_req, res) => {
-  return res.send({
-    ok: false,
-    message: 'refresh_token expects a POST request, not GET'
-  })
+  res.set('Allow', 'POST').status(405).send('Method Not Allowed')
 })
 
 export { authRouter }
