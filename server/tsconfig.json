@@ -2,12 +2,7 @@
   "compilerOptions": {
     "target": "es6",
     "module": "commonjs",
-    "lib": [
-      "dom",
-      "es6",
-      "es2017",
-      "esnext.asynciterable"
-    ],
+    "lib": ["dom", "es6", "es2017", "esnext.asynciterable"],
     "sourceMap": true,
     "outDir": "./build",
     "rootDir": "./src",
@@ -29,19 +24,14 @@
     "baseUrl": ".",
     "paths": {
       "*": ["node_modules/*"],
-      "@resolvers/*":["./src/resolvers/*"],
-      "@entity/*":["./src/entity/*"],
-      "@middleware/*":["./src/middleware/*"],
-      "@utils/*":["./src/utils/*"],
-      "@auth/*":["./src/auth/*"],
-      "@routes/*":["./src/routes/*"]
+      "@resolvers/*": ["./src/resolvers/*"],
+      "@entity/*": ["./src/entity/*"],
+      "@middleware/*": ["./src/middleware/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@auth/*": ["./src/auth/*"],
+      "@routes/*": ["./src/routes/*"]
     }
   },
-  "exclude": [
-    "node_modules"
-  ],
-  "include": [
-    "./src/**/*.tsx",
-    "./src/**/*.ts"
-  ]
+  "exclude": ["node_modules"],
+  "include": ["./src/**/*.tsx", "./src/**/*.ts"]
 }

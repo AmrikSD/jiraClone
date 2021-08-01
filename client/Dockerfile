@@ -21,6 +21,9 @@ RUN npm ci --quiet
 # Put in source AFTER the npm install, otherwise we lose caching of layers
 COPY . /app/
 
+# The below is needed to get the code to refresh on save in a container
+ENV CHOKIDAR_USEPOLLING=true
+
 CMD ["npm", "run", "start"]
 
 #### Production build stage ####

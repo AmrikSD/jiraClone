@@ -1,13 +1,247 @@
-body {
-  margin: 0;
+:root {
+  font-size: 16px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --bg-dark: #282a36;
+  --bg-light: #44475a;
+  --bg-lightest: #f8f8f2;
+
+  --text-dark: var(--bg-lightest);
+  --text-light: var(--bg-lightest);
+  --text-lightest: var(--bg-dark);
+
+  --cyan: #8be9fd;
+  --green: #50fa7b;
+  --orange: #ffb86c;
+  --pink: #ff79c6;
+  --purple: #bd93f9;
+  --red: #ff5555;
+  --yellow: #f1fa8c;
+
+  --transition-speed: 200ms;
 }
 
+
+.dark{
+  --bg: var(--bg-dark);
+  --bg-alt: var(--bg-light);
+  --text: var(--text-dark);
+  --accent: var(--purple);
+  --accent-secondary: var(--pink);
+}
+
+.light{
+  --bg: var(--bg-light);
+  --bg-alt: var(--bg-dark);
+  --text: var(--text-light);
+  --accent: var(--purple);
+  --accent-secondary: var(--pink);
+}
+
+.lightest{
+  --bg: var(--bg-lightest);
+  --bg-alt: var(--bg-light);
+  --text: var(--text-lightest);
+  --accent: var(--pink);
+  --accent-secondary: var(--purple);
+}
+
+
+/* font awsome icons */
+.fa-primary {
+  color: var(--accent-secondary);
+}
+
+.fa-secondary {
+  color: var(--accent);
+}
+
+.fa-primary,
+.fa-secondary {
+  transition: var(--transition-speed);
+}
+
+/* Used during debugging  */
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+body {
+  color: var(--text);
+  background-color: var(--bg);
+  margin: 0rem;
+  padding: 0rem;
+}
+
+::-webkit-scrollbar {
+  width: 0.25rem;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-alt);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+}
+
+main {
+  padding: 1rem;
+}
+
+a{
+  color: currentColor;
+  text-decoration: none;
+}
+
+.navbar {
+
+  position: fixed;
+  background-color: var(--bg-alt);
+
+  transition: width 200ms ease;
+  z-index: INFINITE;
+}
+
+.navbar .logo {
+  font-weight: bold;
+  text-transform: uppercase;
+  align-items: center;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: var(--text);
+  background: var(--bg-alt);
+  font-size: 1.2rem;
+  letter-spacing: 0.3ch;
+  width: 100%;
+}
+
+.logo svg {
+  transform: rotate(-90deg);
+  transition: transform calc(var(--transition-speed) * 1.5);
+}
+
+.logo-text {
+  display: inline;
+  position: absolute;
+  left: 5rem;
+  color: var(--accent-secondary);
+  transition: var(--transition-speed);
+}
+
+.navbar-nav {
+  list-style: none;
+  padding: 0rem;
+  margin: 0rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.nav-item {
+  width: 100%;
+}
+
+/* Theme options */
+.nav-item:last-child {
+  margin-top: auto;
+}
+
+
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  height: 5rem;
+
+  color: var(--accent);
+  text-decoration: none;
+
+  filter: grayscale(33%) opacity(0.5);
+  transition: var(--transition-speed);
+}
+
+.nav-link:hover {
+  filter: grayscale(0%) opacity(1);
+  background-color: var(--bg-alt);
+}
+
+.link-text {
+  display: none;
+}
+
+.nav-link svg {
+  width: 2rem;
+  min-width: 2rem;
+  margin: 0 1.5rem;
+}
+
+
+/* Mobile / Small Screens */
+@media only screen and (max-width: 600px) {
+  
+  main{
+    margin:0;
+    margin-bottom: 5rem;
+  }
+
+
+  .navbar{
+    bottom:0;
+    width:100vw;
+    height:5rem;
+  }
+
+  .logo{
+    display:none
+  }
+
+  .navbar-nav{
+    flex-direction: row;
+  }
+
+  .nav-link{
+    justify-content: center;
+  }
+
+
+  .nav-link:hover {
+    border-top: 1px solid var(--accent);
+  }
+
+}
+
+/* PC / Large Screens */
+@media only screen and (min-width: 600px) {
+  
+  main{
+    margin-left: 5rem;
+  }
+
+  .navbar{
+    width: 5rem;
+    height: 100vh;
+  }
+
+  .navbar:hover {
+    width: 16rem;
+  }
+  .navbar:hover .link-text {
+    display: block;
+  }
+
+  .nav-link:hover {
+    filter: grayscale(0%) opacity(1);
+    background-color: var(--bg);
+    border-right: 1px solid var(--accent);
+  }
+
+  .navbar:hover .logo svg {
+    transform: rotate(-360deg);
+  }
+
 }
