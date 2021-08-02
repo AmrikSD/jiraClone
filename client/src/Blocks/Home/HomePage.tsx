@@ -1,5 +1,5 @@
 import React from 'react'
-import { useGetUserIdQuery, useUsersQuery } from '../../generated/graphql'
+import { useUsersQuery } from '../../generated/graphql'
 
 interface HomePageProps {}
 
@@ -18,7 +18,7 @@ export const HomePage: React.FC<HomePageProps> = () => {
       <ul>
         {data.users.map((user) => (
           <li key={user.id}>
-            {user.email}, {user.id}
+            {user.username} - {user.email}, {user.id}
           </li>
         ))}
       </ul>

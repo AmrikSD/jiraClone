@@ -34,6 +34,7 @@ export type MutationRevokeRefreshTokensForUserArgs = {
 
 export type MutationRegisterArgs = {
   password: Scalars['String'];
+  username: Scalars['String'];
   email: Scalars['String'];
 };
 
@@ -47,12 +48,14 @@ export type Query = {
   __typename?: 'Query';
   hello: Scalars['String'];
   getId: Scalars['String'];
+  getUserData: User;
   users: Array<User>;
 };
 
 export type User = {
   __typename?: 'User';
   id: Scalars['Int'];
+  username: Scalars['String'];
   email: Scalars['String'];
 };
 
@@ -79,6 +82,7 @@ export type LoginMutation = (
 );
 
 export type RegisterMutationVariables = Exact<{
+  username: Scalars['String'];
   email: Scalars['String'];
   password: Scalars['String'];
 }>;
@@ -104,7 +108,7 @@ export type UsersQuery = (
   { __typename?: 'Query' }
   & { users: Array<(
     { __typename?: 'User' }
-    & Pick<User, 'email' | 'id'>
+    & Pick<User, 'username' | 'email' | 'id'>
   )> }
 );
 
@@ -176,8 +180,8 @@ export type LoginMutationHookResult = ReturnType<typeof useLoginMutation>;
 export type LoginMutationResult = Apollo.MutationResult<LoginMutation>;
 export type LoginMutationOptions = Apollo.BaseMutationOptions<LoginMutation, LoginMutationVariables>;
 export const RegisterDocument = gql`
-    mutation Register($email: String!, $password: String!) {
-  register(email: $email, password: $password)
+    mutation Register($username: String!, $email: String!, $password: String!) {
+  register(username: $username, email: $email, password: $password)
 }
     `;
 export type RegisterMutationFn = Apollo.MutationFunction<RegisterMutation, RegisterMutationVariables>;
@@ -195,6 +199,7 @@ export type RegisterMutationFn = Apollo.MutationFunction<RegisterMutation, Regis
  * @example
  * const [registerMutation, { data, loading, error }] = useRegisterMutation({
  *   variables: {
+ *      username: // value for 'username'
  *      email: // value for 'email'
  *      password: // value for 'password'
  *   },
@@ -242,6 +247,7 @@ export type GetUserIdQueryResult = Apollo.QueryResult<GetUserIdQuery, GetUserIdQ
 export const UsersDocument = gql`
     query Users {
   users {
+    username
     email
     id
   }
