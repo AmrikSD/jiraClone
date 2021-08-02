@@ -9,20 +9,23 @@ import { buildSchema } from 'type-graphql'
 import { UserResolver } from '@resolvers/UserResolver'
 import { createConnection } from 'typeorm'
 import morgan from 'morgan'
+import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import isDocker from 'is-docker'
 import config from 'config'
 import { authRouter } from '@routes/authRouter'
-;(async () => {
+(async () => {
   const port = process.env.PORT || 9000
   const hostname = os.hostname() || 'unknown'
   const env = process.env.NODE_ENV || 'unknown'
 
   const app = express()
-
+  app.use(cors({
+    origin:["http://localhost:3000","https://studio.apollographql.com"],
+    credentials:true
+  }))
   app.use(morgan(config.get('log.format'), { stream }))
   app.use(cookieParser())
-
   await createConnection() //all info used in this is from ./ormconfig.json
 
   app.get('/', (_req, res) => {
@@ -38,7 +41,7 @@ import { authRouter } from '@routes/authRouter'
   })
 
   await apolloServer.start()
-  apolloServer.applyMiddleware({ app })
+  apolloServer.applyMiddleware({ app, cors:false })
 
   app.listen(port, () => {
     logger.info(`=================================`)

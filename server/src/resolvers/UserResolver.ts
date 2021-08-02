@@ -35,6 +35,12 @@ class UserResolver {
     return `${payload!.userID}`
   }
 
+  @Query(() => User)
+  @UseMiddleware(isAuth)
+  getUserData(@Ctx() { payload }: Context) {
+    return User.findOne({where: {id: payload!.userID}})
+  }
+
   @Query(() => [User])
   users() {
     return User.find()
@@ -52,12 +58,14 @@ class UserResolver {
   @Mutation(() => Boolean)
   async register(
     @Arg('email') email: string,
+    @Arg('username') username:string,
     @Arg('password') password: string
   ) {
     const hashedPassword: string = await argon2.hash(password)
     try {
       await User.insert({
         email,
+        username,
         password: hashedPassword
       })
       return true

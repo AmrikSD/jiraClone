@@ -25,8 +25,20 @@
   --transition-speed: 200ms;
 }
 
+*.unselectable {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
 
-.dark{
+  /*
+    Introduced in Internet Explorer 10.
+    See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+  */
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.dark {
   --bg: var(--bg-dark);
   --bg-alt: var(--bg-light);
   --text: var(--text-dark);
@@ -34,7 +46,7 @@
   --accent-secondary: var(--pink);
 }
 
-.light{
+.light {
   --bg: var(--bg-light);
   --bg-alt: var(--bg-dark);
   --text: var(--text-light);
@@ -42,14 +54,13 @@
   --accent-secondary: var(--pink);
 }
 
-.lightest{
+.lightest {
   --bg: var(--bg-lightest);
   --bg-alt: var(--bg-light);
   --text: var(--text-lightest);
   --accent: var(--pink);
   --accent-secondary: var(--purple);
 }
-
 
 /* font awsome icons */
 .fa-primary {
@@ -78,6 +89,13 @@ body {
   padding: 0rem;
 }
 
+::selection {
+  background: var(--accent); /* WebKit/Blink Browsers */
+}
+::-moz-selection {
+  background: var(--accent); /* Gecko Browsers */
+}
+
 ::-webkit-scrollbar {
   width: 0.25rem;
 }
@@ -92,13 +110,12 @@ main {
   padding: 1rem;
 }
 
-a{
+a {
   color: currentColor;
   text-decoration: none;
 }
 
 .navbar {
-
   position: fixed;
   background-color: var(--bg-alt);
 
@@ -151,8 +168,6 @@ a{
   margin-top: auto;
 }
 
-
-
 .nav-link {
   display: flex;
   align-items: center;
@@ -180,49 +195,43 @@ a{
   margin: 0 1.5rem;
 }
 
-
 /* Mobile / Small Screens */
 @media only screen and (max-width: 600px) {
-  
-  main{
-    margin:0;
+  main {
+    margin: 0;
     margin-bottom: 5rem;
   }
 
-
-  .navbar{
-    bottom:0;
-    width:100vw;
-    height:5rem;
+  .navbar {
+    bottom: 0;
+    width: 100vw;
+    height: 5rem;
   }
 
-  .logo{
-    display:none
+  .logo {
+    display: none;
   }
 
-  .navbar-nav{
+  .navbar-nav {
     flex-direction: row;
   }
 
-  .nav-link{
+  .nav-link {
     justify-content: center;
   }
-
 
   .nav-link:hover {
     border-top: 1px solid var(--accent);
   }
-
 }
 
 /* PC / Large Screens */
 @media only screen and (min-width: 600px) {
-  
-  main{
+  main {
     margin-left: 5rem;
   }
 
-  .navbar{
+  .navbar {
     width: 5rem;
     height: 100vh;
   }
@@ -243,5 +252,4 @@ a{
   .navbar:hover .logo svg {
     transform: rotate(-360deg);
   }
-
 }

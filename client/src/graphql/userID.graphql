@@ -1,0 +1,3 @@
+query getUserID {
+  getId
+}
