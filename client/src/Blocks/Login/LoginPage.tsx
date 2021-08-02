@@ -43,6 +43,7 @@ export const LoginPage: React.FC<RouteComponentProps> = ({ history }) => {
           type='password'
           value={password}
           placeholder='password'
+          autoComplete='on'
           onChange={(e) => {
             setPassword(e.target.value)
           }}
